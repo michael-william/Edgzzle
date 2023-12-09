@@ -21,7 +21,7 @@ def generate_random_numbers(letter):
             
             return random_numbers
         else:
-            return [0] * 8
+            return ['°','ﬂ','€','^','{}','¿','±','~']
     
     else:
         # Assign a value to the letter based on its position in the alphabet
@@ -34,6 +34,14 @@ def generate_random_numbers(letter):
         random_numbers[-1] += (26 - letter_value - sum(random_numbers))
         
         return random_numbers
+
+
+
+# Example usage:
+#x_value = 5
+#result = find_numbers_for_sum(x_value)
+#print(f"Numbers for sum 27 - {x_value}: {result}")
+
 
 
 def convert_df(df):
@@ -54,11 +62,11 @@ if st.button("Generate Edgzzle"):
             blanks.append(x)
         else:
             blanks.append(' ')
-    #blanks = [' '] * len(list_of_letters)
     black_row = dict(zip(cols,blanks))
     df = pd.DataFrame()
     for i, x in enumerate(list_of_letters):
         df[i] = generate_random_numbers(x)
+        
     
     df = pd.concat([df.iloc[:4], pd.DataFrame([black_row]), df.iloc[4:]]).reset_index(drop=True)
     st.dataframe(df, hide_index=True)
